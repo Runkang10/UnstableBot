@@ -1,4 +1,4 @@
-import { community } from "../bot";
+import {community} from "../bot";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -8,7 +8,7 @@ import {
   SeparatorBuilder,
   SeparatorSpacingSize,
   TextChannel,
-  TextDisplayBuilder
+  TextDisplayBuilder,
 } from "discord.js";
 import path from "node:path";
 import fs from "node:fs";
@@ -19,7 +19,7 @@ async function postRules() {
     "1426920786790191275",
   )) as TextChannel;
 
-  await channel.bulkDelete(channel.messages.cache);
+  await channel.bulkDelete(await channel.messages.fetch({ limit: 10 }));
 
   await channel.send({
     components: components,
