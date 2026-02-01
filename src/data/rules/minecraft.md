@@ -1,10 +1,7 @@
 ## Minecraft Rules
-
 1. All Discord rules apply
 2. No cheating or hacking of any kind
-
 > This applies in prison as well.
-
 3. No exploiting
 4. No mod/texture packs that give unfair advantage
 5. No combat logging
