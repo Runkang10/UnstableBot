@@ -10,6 +10,8 @@ import {
   TextChannel,
   TextDisplayBuilder
 } from "discord.js";
+import path from "node:path";
+import fs from "node:fs";
 
 async function postRules() {
   const server = community();
@@ -22,15 +24,18 @@ async function postRules() {
   await channel.send({
     components: components,
     flags: "IsComponentsV2",
+    allowedMentions: {
+      roles: [],
+      users: [],
+      repliedUser: false,
+    },
   });
 }
 
 const components = [
   new ContainerBuilder()
     .addTextDisplayComponents(
-      new TextDisplayBuilder().setContent(
-        "## Discord Rules\n1. This Discord is a neutral place\n> Racist, homophobic, sexist, and/or religious comments are prohibited\n2. Harassment, threats, or personal attacks against any member are not allowed\n3. Links to fraudulent, pornographic, illegal, or hacking-related websites are prohibited.\n4. Discussion or promotion of illegal activities is forbidden.\n5. Spamming or flooding is not allowed\n> This applies to both text and images.\n6. Advertising or self-promotion without staff permission is prohibited.\n7. Do not bypass filters, punishments, or moderation actions.\n8. Respect staff decisions\n> Arguing with staff members in public channels is not allowed. If you see a staff member abusing powers, open a [ticket](https://discord.com/channels/1426898495230709852/1426918443533471744).\n9. Use channels for their intended purpose.\n10. Follow Discord Terms of Service and Community Guidelines at all times.\n\n> <@&1426921305290313789> and above can decide which punishments to give.\n> We can reduce punishments duration **only in certain** situations by opening a [ticket.",
-      ),
+      new TextDisplayBuilder().setContent(readRules("discord")),
     )
     .addActionRowComponents(
       new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(
@@ -65,9 +70,7 @@ const components = [
         .setDivider(true),
     )
     .addTextDisplayComponents(
-      new TextDisplayBuilder().setContent(
-        "## Minecraft Rules\n1. All Discord rules apply\n2. No cheating or hacking of any kind\n> This applies in prison as well.\n3. No exploiting\n4. No mod/texture packs that give unfair advantage\n5. No combat logging\n6. Do not swear in hate or anger at anyone\n7. No duping\n\n> Using any kind of automation/cheat/hack in prison will result severe punishments.\n> If you stuck in prison for more than 2 days, open a [ticket](https://discord.com/channels/1426898495230709852/1426918443533471744).",
-      ),
+      new TextDisplayBuilder().setContent(readRules("minecraft")),
     )
     .addActionRowComponents(
       new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(
@@ -83,5 +86,12 @@ const components = [
       ),
     ),
 ];
+
+function readRules(name: "discord" | "minecraft"): string {
+  return fs.readFileSync(
+    path.join(process.cwd(), "src", "data", "rules", `${name}.md`),
+    "utf8",
+  );
+}
 
 export default postRules;
