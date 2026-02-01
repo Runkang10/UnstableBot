@@ -19,7 +19,7 @@ function login() {
 }
 
 function community() {
-  return bot.guilds.cache.get(COMMUNITY_GUILD);
+  return bot.guilds.cache.get(COMMUNITY_GUILD)!!;
 }
 
 export { bot, login, community };
