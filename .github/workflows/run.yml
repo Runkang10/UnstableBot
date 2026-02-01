@@ -2,7 +2,7 @@ name: Run
 on: workflow_dispatch
 
 jobs:
-  install:
+  Bot:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +21,7 @@ jobs:
         run: npm run build
 
       - name: Run Discord bot
+        timeout-minutes: 5
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: npm run start
