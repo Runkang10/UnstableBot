@@ -14,6 +14,7 @@
 9. Use channels for their intended purpose.
 10. Follow [Discord Terms of Service](https://discord.com/terms) and [Community Guidelines](https://discord.com/guidelines) at all times.
 
+> Abusing [tickets](https://discord.com/channels/1426898495230709852/1426918443533471744) will result severe punishments. 
 > <@&1426921305290313789> and above can decide which punishments to give.
 > We can reduce punishments duration **only in certain** situations by opening
 > a [ticket](https://discord.com/channels/1426898495230709852/1426918443533471744).
