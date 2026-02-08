@@ -1,4 +1,4 @@
-import {community} from "../bot";
+import { community } from "../bot";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -19,17 +19,24 @@ async function postRules() {
     "1426920786790191275",
   )) as TextChannel;
 
-  await channel.bulkDelete(await channel.messages.fetch({ limit: 10 }));
+  const messages = await channel.messages.fetch({ limit: 1 });
+  const lastMessage = messages.first();
 
-  await channel.send({
-    components: components,
-    flags: "IsComponentsV2",
+  const payload = {
+    components,
+    flags: "IsComponentsV2" as const,
     allowedMentions: {
       roles: [],
       users: [],
       repliedUser: false,
     },
-  });
+  };
+
+  if (lastMessage && lastMessage.author.id === channel.client.user!.id) {
+    await lastMessage.edit(payload);
+  } else {
+    await channel.send(payload);
+  }
 }
 
 const components = [
@@ -42,23 +49,17 @@ const components = [
         new ButtonBuilder()
           .setStyle(ButtonStyle.Link)
           .setLabel("Discord ToS")
-          .setEmoji({
-            name: "📝",
-          })
+          .setEmoji({ name: "📝" })
           .setURL("https://discord.com/terms"),
         new ButtonBuilder()
           .setStyle(ButtonStyle.Link)
           .setLabel("Community Guidelines")
-          .setEmoji({
-            name: "🔖",
-          })
+          .setEmoji({ name: "🔖" })
           .setURL("https://discord.com/guidelines"),
         new ButtonBuilder()
           .setStyle(ButtonStyle.Link)
           .setLabel("Ticket")
-          .setEmoji({
-            name: "🛡️",
-          })
+          .setEmoji({ name: "🛡️" })
           .setURL(
             "https://discord.com/channels/1426898495230709852/1426918443533471744",
           ),
@@ -77,9 +78,7 @@ const components = [
         new ButtonBuilder()
           .setStyle(ButtonStyle.Link)
           .setLabel("Ticket")
-          .setEmoji({
-            name: "🛡️",
-          })
+          .setEmoji({ name: "🛡️" })
           .setURL(
             "https://discord.com/channels/1426898495230709852/1426918443533471744",
           ),
