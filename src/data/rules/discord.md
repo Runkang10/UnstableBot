@@ -1,6 +1,6 @@
 ## Discord Rules
 1. This Discord is a neutral place
-> Racist, homophobic, sexist, and/or religious comments are prohibited
+> Racist, homophobic, sexist, and/or religious comments are prohibited.
 2. English only
 > It's fine saying few words.
 3. Harassment, threats, or personal attacks against any member are not allowed
